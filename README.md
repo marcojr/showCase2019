@@ -118,9 +118,9 @@ Too much work, no ? Yeah, I know...let's make different...download the code to e
 
 # Few screen shots of mobile react native solution
 
-Login          |  Initial Screen
+Initial Screen         |  Login Screen
 :-------------------------:|:-------------------------:
-![![](https://s3.eu-west-2.amazonaws.com/www.marcojr.com.br/pub/mr5.png)](https://s3.eu-west-2.amazonaws.com/www.marcojr.com.br/pub/mr5.png)  |  [![](https://s3.eu-west-2.amazonaws.com/www.marcojr.com.br/pub/mr6.png)](https://s3.eu-west-2.amazonaws.com/www.marcojr.com.br/pub/mr6.png)
+![![](https://s3.eu-west-2.amazonaws.com/www.marcojr.com.br/pub/mr6.png)](https://s3.eu-west-2.amazonaws.com/www.marcojr.com.br/pub/mr6.png)  |  [![](https://s3.eu-west-2.amazonaws.com/www.marcojr.com.br/pub/mr5.png)](https://s3.eu-west-2.amazonaws.com/www.marcojr.com.br/pub/mr5.png)
 
 Signing Up         |  Confirm SMS
 :-------------------------:|:-------------------------:
