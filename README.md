@@ -67,12 +67,12 @@ checkIfExists (email, phone)
 
 # Executing react_native_graphql_redux
 
-Assuming that you have already React Native installed and this repo cloned, and follow the steps bellow:
+Assuming that you have already React Native installed and this repo cloned, follow the steps bellow:
 
 - perform a npm install into the react_native_graphql_redux
 - Use react-native upgrade to generate ios and android files
 - Go to ios folder and execute pod install (assuming you have cocoa pods installed)
-- create the into react_native_graphql_redux/src/config/servers.js and put the following code:
+- create file react_native_graphql_redux/src/config/servers.js and put the following code:
 
 ```javascript
 export const graphqlServer = '(url containing the nodejs_graphql_apollo_sequelize)/graphql'
