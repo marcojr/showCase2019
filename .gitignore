@@ -1,0 +1,10 @@
+node_modules
+secrets.js
+secrets.ts
+servers.js
+Archive.zip
+react_native_graphql_redux/android
+react_native_graphql_redux/ios
+npm-debug.log
+.DS_Store
+.vscode
