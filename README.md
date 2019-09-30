@@ -99,11 +99,11 @@ export const BLOB_SECRET = "??????"
 export const BLOB_ACCOUNT = "??????"
 ```
 
-Then execute :
+Then execute /nodejs_graphql_apollo_sequelize:
 
 
 
-    npm install at /nodejs_graphql_apollo_sequelize
+    npm install
 
 This GraphQL Apollo Server uses Microsoft SQL Server. You will find the file to generate the tables inside the folder /database
 
