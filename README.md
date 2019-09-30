@@ -65,6 +65,20 @@ checkIfExists (email, phone)
 
 - **angular_graphql_rxjs_ngrx** : Not started
 
+# Executing react_native_graphql_redux
+
+Assuming that you have already React Native installed and this repo cloned, and follow the steps bellow:
+
+- perform a npm install into the react_native_graphql_redux
+- Use react-native upgrade to generate ios and android files
+- Go to ios folder and execute pod install (assuming you have cocoa pods installed)
+- create the into react_native_graphql_redux/src/config/servers.js and put the following code:
+
+```javascript
+export const graphqlServer = '(url containing the nodejs_graphql_apollo_sequelize)/graphql'
+export const nodeAPI = '(url containing the nodejs_graphql_apollo_sequelize)/'
+```
+
 # Deploying nodejs_graphql_apollo_sequelize:
 
 After clone the repo, go to /nodejs_graphql_apollo_sequelize and create the file nodejs_graphql_apollo_sequelize/src/secrets.js and populate with your own data:
