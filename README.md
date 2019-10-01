@@ -59,7 +59,7 @@ At the **react_native_graphql_redux **you will find the mobile solution using Re
 - **nodejs_graphql_apollo_sequelize** : Missing implementation of a query
 checkIfExists (email, phone) 
 
-- **react_native_graphql_redux** : after-login page (User Page), constraints of Login Page , forgot password and check if e-mail and/or phone has already been registered. Also, I need to put more transitions at the login forms with is an improvement.
+- **react_native_graphql_redux** : after-login page (User Page), forgot password and persistent login. Also, I need to put more transitions at the login forms with is an improvement.
 
 - **react_js_graphql_redux** : Not started
 
