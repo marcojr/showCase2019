@@ -125,5 +125,15 @@ export default StyleSheet.create({
         borderWidth: 5,
         borderColor: 'lime',
         marginLeft: (SCREEN_WIDTH / 2) - (170 /2)
+    },
+    btnReset : {
+        position: 'absolute',
+        top: THEME_DEFAULT_PADDING * 2,
+        right: THEME_DEFAULT_PADDING/2,
+        padding: 10,
+        zIndex: 9999
+    },
+    btnResetIcon : {
+        color: 'white'
     }
 })

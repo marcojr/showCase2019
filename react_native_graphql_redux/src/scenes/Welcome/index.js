@@ -2,13 +2,18 @@ import React from 'react'
 import { connect } from "react-redux"
 import { Actions } from 'react-native-router-flux'
 import RNFetchBlob from 'rn-fetch-blob'
-import { View, Image, ActivityIndicator, Text, 
-    Animated, TouchableWithoutFeedback, Dimensions, Modal } from 'react-native'
+import {
+    View, Image, ActivityIndicator, Text,
+    Animated, TouchableWithoutFeedback, TouchableOpacity, 
+    Dimensions, Modal, ImageBackground
+} from 'react-native'
 import AutoHeightImage from 'react-native-auto-height-image'
 import LoginForm from '../../containers/loginForm'
 import MobileForm from '../../containers/mobileForm'
 import Toaster from '../../containers/toaster'
 import style from './style'
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { login, getUser, completeLogin, createUser } from '../../redux/AppActions'
 import RegForm from '../RegForm'
 import SvcPictureUpload from '../../services/SvcGetPicUploadUri'
@@ -25,13 +30,12 @@ class Welcome extends React.Component {
             showRegForm: false,
             toasterMsg: ""
         }
-        setTimeout(()=>{
+        setTimeout(() => {
             //this.setState({toasterMsg : "hellow" })
-        },3000)
+        }, 3000)
     }
-    showError(toasterMsg){
-        console.log(994,toasterMsg)
-        this.setState({toasterMsg})
+    showError(toasterMsg) {
+        this.setState({ toasterMsg })
     }
     setBlurOpacity(toOpaque) {
         Animated.timing(
@@ -73,7 +77,8 @@ class Welcome extends React.Component {
                     this.fadeCore(0, () => {
                         this.fadeCore(1)
                         this.setState({
-                            displayOnCore: 'loginForm'
+                            displayOnCore: 'loginForm',
+                            showReset: true
                         })
                     })
                 }}>
@@ -82,7 +87,7 @@ class Welcome extends React.Component {
                     </View>
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback onPress={async () => {
-                    this.setState({showRegForm : true })
+                    this.setState({ showRegForm: true, showReset: true })
                 }}>
                     <View style={[style.button, style.registerButton]}>
                         <Text style={style.regButtonTxt}>Sign Up</Text>
@@ -92,7 +97,7 @@ class Welcome extends React.Component {
         )
     }
     createUser(vars) {
-        const doCreate = () =>{
+        const doCreate = () => {
             this.props.createUser(vars).then(result => {
                 if (result.payload.data) {
                     Actions.user()
@@ -103,18 +108,29 @@ class Welcome extends React.Component {
                         displayOnCore: 'logRegButtons'
                     })
                 }
+            }).catch(error =>{
+                let msg
+                if(error.response) {
+                    msg = ex.response.errors[0].message
+                }
+                else {
+                    msg = "NETWORK_ERROR"
+                }
+
+                this.showError(msg)
             })
         }
         this.setState({
             showRegForm: false,
-            displayOnCore: null
+            displayOnCore: null,
+            showReset: false
         })
-        setTimeout(async() =>{
+        setTimeout(async () => {
             this.setState({
                 spinnerText: 'Registering...',
                 displayOnCore: 'spinner'
             })
-            if(vars.picture) {
+            if (vars.picture) {
                 const uriFromBlob = await SvcPictureUpload('png')
                 const uri = uriFromBlob.data.uri
                 RNFetchBlob.fetch('PUT', uri, {
@@ -122,7 +138,7 @@ class Welcome extends React.Component {
                     'x-ms-blob-type': 'BlockBlob'
                 }, RNFetchBlob.wrap(vars.picture.replace('file://', '')))
                     .then(r => {
-                        vars.picture = uri.substring(0,uri.indexOf('?'))
+                        vars.picture = uri.substring(0, uri.indexOf('?'))
                         console.log(vars.picture)
                         doCreate()
                     })
@@ -132,29 +148,50 @@ class Welcome extends React.Component {
             } else {
                 doCreate()
             }
-        },1000)
+        }, 1000)
     }
     doLogin(email, password) {
+        const emailTst = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        if (!emailTst.test(String(email)) || this.state.email === '') {
+            this.showError("Invalid E-Mail Address")
+            return
+        }
+        if(password.length === 0) {
+            this.showError("Please type your password")
+            return
+        }
         this.setState({
             spinnerText: 'Logging in...',
-            displayOnCore: 'spinner'
+            displayOnCore: 'spinner',
+            showReset: false
         })
         this.props.login(email, password).then(result => {
-            if (result.payload.data) {
+            console.log(643, result)
+            const payload = result.payload
+            if (payload.data) {
                 Actions.user()
             }
-            if (result.error) {
+            if (payload.error) {
+                let msg
+                if(payload.error.response) {
+                    msg = payload.error.response.errors[0].message
+                } else {
+                    msg = "NETWORK_ERROR"
+                }
                 this.setState({
                     spinnerText: '',
-                    displayOnCore: 'logRegButtons'
+                    displayOnCore: 'loginForm'
                 })
+                this.showError(msg)
             }
         })
+
     }
     doMobileLogin(userid, code) {
         this.setState({
             spinnerText: 'Logging in...',
-            displayOnCore: 'spinner'
+            displayOnCore: 'spinner',
+            showReset: false
         })
         this.props.completeLogin(userid, code).then(result => {
             if (result.payload.data) {
@@ -209,30 +246,51 @@ class Welcome extends React.Component {
                 </Animated.View>
             </View>)
     }
+    reset() {
+        this.fadeCore(0, () => {
+            this.fadeCore(1)
+            this.setState({
+                showReset: false,
+                displayOnCore: 'logRegButtons'
+            })
+        })
+    }
+    renderReset() {
+        if(!this.state.showReset) { return null }
+        return (
+            <TouchableOpacity style={style.btnReset} onPress={() => {
+                this.reset()
+            }}>
+                <FontAwesomeIcon size={35} style={style.btnResetIcon} icon={faTimesCircle} />
+            </TouchableOpacity>
+        )
+    }
     render() {
-        if(this.state.showRegForm) {
-            return(
+        if (this.state.showRegForm) {
+            return (
                 <Modal
                     animationType="slide"
                     transparent={true}
                     visible={true}>
-                    <RegForm useDarkMode={this.props.useDarkMode} onCreate={ vars =>
+                    <RegForm useDarkMode={this.props.useDarkMode} 
+                    onCreate={vars =>
                         this.createUser(vars)
-                    } />
+                    }
+                    onCancel={() =>{ this.setState({ showRegForm: false})}} />
                 </Modal>
             )
         }
         return (
-            <View style={{ flex: 1 }}>
-                <Toaster 
+            <View style={{ flex: 1 }} >
+                <Toaster
                     msg={this.state.toasterMsg}
-                    onFinished={()=>{
-                        this.setState({toasterMsg : ""})
-                    }} />
+                    onFinished={() => {
+                        this.setState({ toasterMsg: "" })
+                }} />
                 {this.renderBackground()}
                 {this.renderDivisions()}
+                {this.renderReset()}
             </View>
-
         )
     }
 }
@@ -244,8 +302,8 @@ const mapStateToProps = state => (
 
 export default connect(mapStateToProps,
     {
-        login, 
-        getUser, 
-        completeLogin, 
+        login,
+        getUser,
+        completeLogin,
         createUser
     })(Welcome)

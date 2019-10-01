@@ -99,5 +99,15 @@ export default StyleSheet.create({
     spinnerText: {
         fontSize: 5,
         color: 'white'
+    },
+    btnReset : {
+        position: 'absolute',
+        top: THEME_DEFAULT_PADDING * 2,
+        right: THEME_DEFAULT_PADDING/2,
+        padding: 10,
+        zIndex: 5000
+    },
+    btnResetIcon : {
+        color: 'white'
     }
 })

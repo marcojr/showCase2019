@@ -7,7 +7,7 @@ import DatePicker from 'react-native-datepicker'
 import RNPickerSelect from 'react-native-picker-select'
 import style from './style'
 import ImagePicker from "react-native-image-crop-picker";
-import { faCamera, faImages } from '@fortawesome/free-solid-svg-icons'
+import { faCamera, faImages, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { SCREEN_WIDTH } from '../../config/theme'
 import Toaster from '../../containers/toaster'
@@ -58,7 +58,7 @@ class RegForm extends React.Component {
             dob: '1975-03-24',
             toasterMsg: "",
             hideGetStart: false,
-            isDarkMode:false
+            isDarkMode: false
         }
     }
     selectFromGallery() {
@@ -87,22 +87,22 @@ class RegForm extends React.Component {
         let vars = {
             email: this.state.email,
             password: this.state.password1,
-            phone: this.state.phone, 
+            phone: this.state.phone,
             gender: this.state.gender,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             dob: this.state.dob
         }
         if (this.state.imageSelected) {
-            vars.picture=this.state.imageSelected
+            vars.picture = this.state.imageSelected
         }
         this.props.onCreate(vars)
     }
     checkConstraits(step) {
         const stepBefore = step - 1
-        if(stepBefore === 1) {
-            if(
-                this.state.firstName.length < 3 || 
+        if (stepBefore === 1) {
+            if (
+                this.state.firstName.length < 3 ||
                 this.state.firstName.length > 49 ||
                 this.state.lastName.length < 3 ||
                 this.state.lastName.length > 49
@@ -110,28 +110,28 @@ class RegForm extends React.Component {
                 return "Invalid First and/or Last Name"
             }
         }
-        if(stepBefore === 2) {
+        if (stepBefore === 2) {
             const email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             const phone = /^\+(?:[0-9] ?){6,14}[0-9]$/
-            if(!email.test(String(this.state.email)) || this.state.email ==='') {
+            if (!email.test(String(this.state.email)) || this.state.email === '') {
                 return "Invalid E-Mail Address"
                 //return 'A-' + new Date().toISOString()
             }
-            if(!phone.test(this.state.phone)) {
+            if (!phone.test(this.state.phone)) {
                 return "Phone format must be international.Starts with +, then country code. ex: +447900000000"
                 //return 'B-' + new Date().toISOString()
             }
         }
-        if(stepBefore === 3) {
-            if(this.state.gender === '' || this.state.dob ==='') {
+        if (stepBefore === 3) {
+            if (this.state.gender === '' || this.state.dob === '') {
                 return "Gender and Birthday are both mandatory"
             }
         }
-        if(stepBefore === 4) {
-            if(this.state.password1.length < 4 || this.state.password1.length > 12) {
+        if (stepBefore === 4) {
+            if (this.state.password1.length < 4 || this.state.password1.length > 12) {
                 return "Password must have 4 to 12 length"
             }
-            if(this.state.password1 !== this.state.password2) {
+            if (this.state.password1 !== this.state.password2) {
                 return "Passwords does not matches."
             }
         }
@@ -140,8 +140,8 @@ class RegForm extends React.Component {
     goToStep(step) {
         const error = this.checkConstraits(step)
         console.log('error', error)
-        if(error !== '') {
-            this.setState({ toasterMsg : error})
+        if (error !== '') {
+            this.setState({ toasterMsg: error })
             return null
         }
         const setStep = (step) => {
@@ -247,7 +247,7 @@ class RegForm extends React.Component {
                     ref={(input) => { this.email = input; }}
                     returnKeyType="next"
                     onSubmitEditing={() => { this.mobile.focus() }}
-                    style={style.input} placeholder={'E-Mail'}/>
+                    style={style.input} placeholder={'E-Mail'} />
             </Animated.View>
             <Animated.View style={[style.fieldWrapper, { left: this.state.field2Left }]}>
                 <TextInput
@@ -258,7 +258,7 @@ class RegForm extends React.Component {
                     ref={(input) => { this.mobile = input; }}
                     onSubmitEditing={() => { this.goToStep(this.state.step + 1) }}
                     returnKeyType="done"
-                    style={style.input} placeholder={'Mobile'}/>
+                    style={style.input} placeholder={'Mobile'} />
             </Animated.View>
         </View>)
     }
@@ -333,11 +333,12 @@ class RegForm extends React.Component {
                                 fontSize: 25
                             },
                             datePicker: {
-                                backgroundColor: this.props.useDarkMode ? '#222' : 'white' },
-                                datePickerCon: { 
-                                    backgroundColor: this.props.useDarkMode ? '#333' : 'white' 
-                                }
+                                backgroundColor: this.props.useDarkMode ? '#222' : 'white'
+                            },
+                            datePickerCon: {
+                                backgroundColor: this.props.useDarkMode ? '#333' : 'white'
                             }
+                        }
                         }
                         onDateChange={
                             dob => {
@@ -453,10 +454,10 @@ class RegForm extends React.Component {
                     <Text style={style.stepDesc}>{this.state.stepDesc}</Text>
                 </View>
                 <TouchableOpacity onPress={() => {
-                    this.setState({hideGetStart: true})
+                    this.setState({ hideGetStart: true })
                     this.goToStep(this.state.step + 1)
                 }}>
-                    { this.state.step === 0 && !this.state.hideGetStart ?
+                    {this.state.step === 0 && !this.state.hideGetStart ?
                         <View style={[style.buttonSpacing, style.button, style.buttonNext]}>
                             <Text style={style.buttonNextTxt}>
                                 {
@@ -469,20 +470,27 @@ class RegForm extends React.Component {
             </View>
         )
     }
-
     render() {
         return (
             <View style={style.page}>
-                <Toaster 
+                <Toaster
                     msg={this.state.toasterMsg}
-                    onFinished={()=>{
-                        this.setState({toasterMsg : ""})
+                    onFinished={() => {
+                        this.setState({ toasterMsg: "" })
                     }} />
+                    
                 <Image style={style.bkg}
                     blurRadius={50}
                     source={require('../../assets/regform_bkg.png')} />
                 <Text style={style.titleText}>{this.state.stepName}</Text>
                 {this.state.step < 5 ? this.renderForm() : this.renderPictureAndFinish()}
+                <TouchableWithoutFeedback onPress={() => {
+                    this.props.onCancel()
+                }}>
+                    <View style={style.btnReset}>
+                        <FontAwesomeIcon size={35} style={style.btnResetIcon} icon={faTimesCircle} />
+                    </View>
+                </TouchableWithoutFeedback>
             </View>
 
         )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Keyboard, TouchableWithoutFeedback ,  TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, Keyboard, TouchableWithoutFeedback, TouchableOpacity, TextInput } from 'react-native'
 import style from './style'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faMobileAlt, faBroadcastTower } from '@fortawesome/free-solid-svg-icons'
@@ -20,44 +20,42 @@ export default class extends React.Component {
         }
     }
     sendCode() {
+        const phoneTst = /^\+(?:[0-9] ?){6,14}[0-9]$/
+        if (!phoneTst.test(this.state.phone)) {
+            this.props.onError("Phone format must be international.Starts with +, then country code. ex: +447900000000")
+            return
+        }
         if (this.state.timer > 0) {
             alert('Hey ! Not so fast ! Please wait more ' + this.state.timer + ' seconds.')
             return
         }
         const vars = { phone: this.state.phone }
         request(graphqlServer, GQL_CREATE_PHONE_CHALLENGE, vars).then(res => {
-            if (res.createPhoneChallenge) {
+            this.setState({
+                userId: res.createPhoneChallenge.USER_id
+            })
+            this.setState({
+                waitingCode: true,
+                timer: 60
+            })
+            this.timerHandler = setInterval(() => {
                 this.setState({
-                    userId: res.createPhoneChallenge.USER_id
+                    timer: this.state.timer - 1
                 })
-                this.setState({
-                    waitingCode: true,
-                    timer: 60
-                })
-                this.timerHandler = setInterval(() => {
-                    this.setState({
-                        timer: this.state.timer - 1
-                    })
-                    if (this.state.timer === 0) {
-                        clearInterval(this.timerHandler)
-                    }
-                }, 1000)
-            } else {
-                console.log(445, 'error', res)
-                //this.props.onError
-            }
+                if (this.state.timer === 0) {
+                    clearInterval(this.timerHandler)
+                }
+            }, 1000)
         }
         )
             .catch(ex => {
-                /*console.log(446)
-                console.log(ex)
-                console.log(ex.request)
-                console.log(ex.response)*/
+                console.log(881, ex)
+                this.props.onError("NETWORK_ERROR")
                 this.props.onError(ex.response.errors[0].message)
             })
     }
-    confirmCode(code){
-        this.props.onCode(this.state.userId,code)
+    confirmCode(code) {
+        this.props.onCode(this.state.userId, code)
     }
     render() {
         if (!this.state.waitingCode) {
@@ -69,10 +67,10 @@ export default class extends React.Component {
                         placeholderTextColor={'rgba(255,255,255,0.5)'}
                         returnKeyType="done"
                         ref={(input) => { this.phone = input; }}
-                        onSubmitEditing={() => { 
-                            setTimeout(() =>{
+                        onSubmitEditing={() => {
+                            setTimeout(() => {
                                 this.sendCode()
-                            },1000)
+                            }, 1000)
                         }}
                         onChangeText={(phone) => this.setState({ phone })}
                         value={this.state.phone}
@@ -103,11 +101,11 @@ export default class extends React.Component {
                     />
                 </View>
                 <View style={style.bellowButton}>
-                    <TouchableOpacity onPress={() => { 
-                        this.setState({ waitingCode: false})
+                    <TouchableOpacity onPress={() => {
+                        this.setState({ waitingCode: false })
                         Keyboard.dismiss()
                         this.phoneFocus()
-                         }}>
+                    }}>
                         <View style={style.bt1Wrapper}>
                             <FontAwesomeIcon size={16} style={style.bt1Icon} icon={faMobileAlt} />
                             <Text style={style.bt1PhoneTxt}>Change number</Text>
