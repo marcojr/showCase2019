@@ -1,4 +1,4 @@
-import {AppRegistry} from 'react-native';
-import App from './src';
+import { AppRegistry } from 'react-native'
+import App from './src'
 console.disableYellowBox = true
-AppRegistry.registerComponent('mrlightredux', () => App);
+AppRegistry.registerComponent('mrlightredux', () => App)
