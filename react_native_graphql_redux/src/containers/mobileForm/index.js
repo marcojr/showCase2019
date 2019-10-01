@@ -49,6 +49,7 @@ export default class extends React.Component {
     }
     )
       .catch(ex => {
+        //Review this !! 
         console.log(881, ex)
         this.props.onError('NETWORK_ERROR')
         this.props.onError(ex.response.errors[0].message)

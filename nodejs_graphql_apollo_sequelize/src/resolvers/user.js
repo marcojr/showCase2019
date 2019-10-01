@@ -11,6 +11,22 @@ export default {
                 throw new UserInputError(ErrorTypes.ERROR_INVALID_SESSION)
             }
             return User.findOne({ where : { id: context.USER_id }})
+        },
+        countUsers: async(root, arg, context) => {
+            let countEmail
+            let countPhone
+            if(arg.email) {
+                const find = { where : { email: arg.email }}
+                countEmail = User.count(find)
+            }
+            if(arg.phone) {
+                const find = { where : { phone: arg.phone }}
+                countPhone = User.count(find)
+            }
+            return {
+                emailFound: countEmail,
+                phoneFound: countPhone
+            }
         }
     },
     Mutation: {

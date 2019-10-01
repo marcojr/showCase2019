@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-express'
 export default gql`
     extend type Query {
         getUser : User!
+        countUsers(email: String, phone: String): CountUsers!
     },
     extend type Mutation {
         createUser(
@@ -31,5 +32,9 @@ export default gql`
         gender: String,
         loginProvider: String!,
         picture: String
+    },
+    type CountUsers {
+        emailFound: Int,
+        phoneFound: Int
     }
 `

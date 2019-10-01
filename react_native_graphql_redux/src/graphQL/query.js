@@ -5,3 +5,15 @@ query GetUser {
     }
   }
 `
+export const GQL_COUNT_USER = `
+query 
+  CountUser($email: String, $phone: String) 
+    {
+      countUsers
+      (
+        email: $email,
+        phone : $phone
+      ) 
+      { emailFound, phoneFound }
+    }
+`

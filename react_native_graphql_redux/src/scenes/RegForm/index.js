@@ -5,12 +5,15 @@ import {
 } from 'react-native'
 import DatePicker from 'react-native-datepicker'
 import RNPickerSelect from 'react-native-picker-select'
+import { GQL_COUNT_USER } from '../../graphQL/query'
 import style from './style'
 import ImagePicker from 'react-native-image-crop-picker'
 import { faCamera, faImages, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { SCREEN_WIDTH } from '../../config/theme'
 import Toaster from '../../containers/toaster'
+import { graphqlServer } from '../../config/servers'
+import { request } from 'graphql-request'
 const steps = [
   {
     name: 'Sign Up',
@@ -42,7 +45,7 @@ class RegForm extends React.Component {
     super(props)
     this.state = {
       imageSelected: undefined,
-      step: 0,
+      step: 2,
       stepName: steps[0].name,
       stepDesc: steps[0].desc,
       fieldWrapperOpacity: new Animated.Value(1),
@@ -61,7 +64,6 @@ class RegForm extends React.Component {
       isDarkMode: false
     }
   }
-
   selectFromGallery () {
     ImagePicker.openPicker({
       width: 2048,
@@ -101,7 +103,6 @@ class RegForm extends React.Component {
     }
     this.props.onCreate(vars)
   }
-
   checkConstraits (step) {
     const stepBefore = step - 1
     if (stepBefore === 1) {
@@ -119,11 +120,9 @@ class RegForm extends React.Component {
       const phone = /^\+(?:[0-9] ?){6,14}[0-9]$/
       if (!email.test(String(this.state.email)) || this.state.email === '') {
         return 'Invalid E-Mail Address'
-        // return 'A-' + new Date().toISOString()
       }
       if (!phone.test(this.state.phone)) {
         return 'Phone format must be international.Starts with +, then country code. ex: +447900000000'
-        // return 'B-' + new Date().toISOString()
       }
     }
     if (stepBefore === 3) {
@@ -141,13 +140,34 @@ class RegForm extends React.Component {
     }
     return ''
   }
-
-  goToStep (step) {
+  async goToStep (step) {
     const error = this.checkConstraits(step)
-    console.log('error', error)
+    
     if (error !== '') {
       this.setState({ toasterMsg: error })
       return null
+    }
+    if(step ===3){
+      const vars = { email : this.state.email, phone: this.state.phone }
+      let count
+      try {
+        count = await request(graphqlServer, GQL_COUNT_USER, vars)
+      } catch {
+        this.setState({ toasterMsg: "NETWORK_ERROR" })
+        return null
+      }
+      if(count.countUsers.emailFound > 0 && count.countUsers.phoneFound > 0) {
+        this.setState({ toasterMsg: "E-Mail and Phone already exists."})
+        return null
+      }
+      if(count.countUsers.emailFound === 0 && count.countUsers.phoneFound > 0) {
+        this.setState({ toasterMsg: "Phone already exists."})
+        return null
+      }
+      if(count.countUsers.emailFound > 0 && count.countUsers.phoneFound === 0) {
+        this.setState({ toasterMsg: "E-Mail already exists."})
+        return null
+      }
     }
     const setStep = (step) => {
       this.fadeOutFields()
