@@ -31,7 +31,7 @@ class Welcome extends React.Component {
       toasterMsg: ''
     }
     setTimeout(() => {
-      //this.doLogin('me@marcojr.com.br','1111')
+      // this.doLogin('me@marcojr.com.br','1111')
     }, 2000)
   }
 
@@ -152,15 +152,18 @@ class Welcome extends React.Component {
           })
           .catch(err => {
             // review this
+            console.log(err)
           })
       } else {
         doCreate()
       }
     }, 1000)
   }
-  storeToken(user) {
+
+  storeToken (user) {
     AsyncStorage.setItem('loggedUser', JSON.stringify(user))
   }
+
   doLogin (email, password) {
     const emailTst = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (!emailTst.test(String(email)) || this.state.email === '') {
@@ -226,15 +229,15 @@ class Welcome extends React.Component {
         return (
           <LoginForm
             onLogin={(email, password) => this.doLogin(email, password)}
-            onForgot={() =>{
+            onForgot={() => {
               Alert.alert(
                 'Really ?',
                 'Ok, you forgot your password. And I forgot to create this feature.Sorry !',
-                [ 
-                  
-                  {text: 'OK', onPress: () => console.log('OK Pressed')}
+                [
+
+                  { text: 'OK', onPress: () => console.log('OK Pressed') }
                 ],
-                {cancelable: false},
+                { cancelable: false }
               )
             }}
             onLoginWithPhone={() => {

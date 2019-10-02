@@ -14,7 +14,7 @@ export default class extends React.Component {
     this.state = {
       waitingCode: false,
       timer: 0,
-      phone: '+447851160001',
+      phone: '',
       userId: undefined
     }
   }
@@ -49,7 +49,7 @@ export default class extends React.Component {
     }
     )
       .catch(ex => {
-        //Review this !! 
+        // Review this !!
         console.log(881, ex)
         this.props.onError('NETWORK_ERROR')
         this.props.onError(ex.response.errors[0].message)

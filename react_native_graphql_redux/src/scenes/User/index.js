@@ -27,7 +27,7 @@ class User extends React.Component {
   addData(field, value) {
     data = Object.assign(this.state.data)
     data.push({
-      key: Math.random(),
+      key: field+value,
       field, value
     })
     this.setState({ data })
@@ -86,7 +86,10 @@ class User extends React.Component {
         <View style={style.core}>
           <Image
             style={style.picture}
-            source={{ uri: this.props.user.data.picture }}
+            source={ 
+              this.props.user.data.picture ? { uri: this.props.user.data.picture }
+              : require('../../assets/no_user_picture.png')
+            }
           />
           <View style={style.actionButtons}>
             <TouchableOpacity onPress={() => {

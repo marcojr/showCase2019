@@ -19,7 +19,7 @@ export default StyleSheet.create({
     top: 0,
     left: 0,
     width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
+    height: SCREEN_HEIGHT
   },
   core: {
     backgroundColor: 'white',
@@ -29,14 +29,14 @@ export default StyleSheet.create({
     marginLeft: THEME_DEFAULT_PADDING * 1.5,
     borderRadius: THEME_DEFAULT_BORDER_RADIUS * 4,
     paddingBottom: 5,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 7,
-      height: 5,
+      height: 5
     },
     shadowOpacity: 0.36,
     shadowRadius: 6.68,
-    elevation: 11,
+    elevation: 11
   },
   picture: {
     width: coreWidth / 2,
@@ -54,7 +54,7 @@ export default StyleSheet.create({
     left: SCREEN_WIDTH / 2 - (secondBkgConstant / 2),
     width: secondBkgConstant,
     backgroundColor: '#eaeaea',
-    //backgroundColor: 'rgba(255,255,255,0.6)',
+    // backgroundColor: 'rgba(255,255,255,0.6)',
     height: secondBkgConstant,
     borderRadius: secondBkgConstant / 2
 
@@ -71,7 +71,7 @@ export default StyleSheet.create({
   },
   name: {
     fontSize: 30,
-    fontWeight: "100"
+    fontWeight: '100'
   },
   dob: {
     fontSize: 17,
@@ -81,20 +81,20 @@ export default StyleSheet.create({
     marginRight: 15
   },
   actionButtons: {
-    //backgroundColor: 'red',
+    // backgroundColor: 'red',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 15
   },
   list: {
-    //backgroundColor: 'blue'
+    // backgroundColor: 'blue'
   },
   data: {
     flex: 1,
     paddingLeft: THEME_DEFAULT_PADDING / 2,
     paddingTop: 15
-    //backgroundColor: 'green'
+    // backgroundColor: 'green'
   },
   bt1Wrapper: THEME_BUTTON3,
   bt1Txt: THEME_BUTTON3_TXT,
@@ -103,26 +103,24 @@ export default StyleSheet.create({
   bt2Txt: THEME_BUTTON6_TXT,
   bt2Icon: THEME_BUTTON6_ICON,
   itemRowWrapper: {
-    paddingRight: 15, 
-    display: 'flex', 
-    flexDirection: 'row', 
+    paddingRight: 15,
+    display: 'flex',
+    flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  field : {
+  field: {
     fontSize: 15
   },
-  valueWrapper : { 
-    display: 'flex', 
-    flexDirection: 'row' 
+  valueWrapper: {
+    display: 'flex',
+    flexDirection: 'row'
   },
-  value: { 
-    marginRight: 5, 
-    fontWeight: 'bold', 
-    color: '#c0c0c0' 
+  value: {
+    marginRight: 5,
+    fontWeight: 'bold',
+    color: '#c0c0c0'
   },
   chevron: {
     color: '#eaeaea'
   }
 })
-
-

@@ -5,14 +5,11 @@ import ReduxThunk from 'redux-thunk'
 import Reducers from './redux'
 import Routes from './config/routes'
 
-
-
-
 class App extends React.Component {
   render () {
     return (
       <Provider store={store}>
-        <Routes/>
+        <Routes />
       </Provider>
     )
   }

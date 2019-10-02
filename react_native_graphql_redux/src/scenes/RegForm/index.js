@@ -17,7 +17,7 @@ import { request } from 'graphql-request'
 const steps = [
   {
     name: 'Sign Up',
-    desc: ' '
+    desc: 'We will help you to create an account in a few easy steps.'
   },
   {
     name: 'Your Name ?',
@@ -25,7 +25,7 @@ const steps = [
   },
   {
     name: 'Contacts',
-    desc: 'This is the Get Starting This is the Get Starting This is the Get Starting '
+    desc: 'We will not ring or mail you. I am serious !'
   },
   {
     name: "A bit more 'bout you",
@@ -33,11 +33,11 @@ const steps = [
   },
   {
     name: 'Password',
-    desc: 'This is the Get Starting'
+    desc: 'No need to be a strong password, ok ? 123 is fine.'
   },
   {
     name: 'Your picture',
-    desc: "It's not mandatory."
+    desc: "It's not mandatory, but if you wish: SAY CHEEEESE !"
   }
 ]
 class RegForm extends React.Component {
@@ -51,19 +51,20 @@ class RegForm extends React.Component {
       fieldWrapperOpacity: new Animated.Value(1),
       field1Left: new Animated.Value(0),
       field2Left: new Animated.Value(0),
-      email: 'me@marcojr.com.br',
-      firstName: 'Marco',
-      lastName: 'S. Junior',
-      password1: '1111',
-      password2: '1111',
-      gender: 'M',
-      phone: '+447903450712',
-      dob: '1975-03-24',
+      email: '',
+      firstName: '',
+      lastName: '',
+      password1: '',
+      password2: '',
+      gender: '',
+      phone: '',
+      dob: '',
       toasterMsg: '',
       hideGetStart: false,
       isDarkMode: false
     }
   }
+
   selectFromGallery () {
     ImagePicker.openPicker({
       width: 2048,
@@ -83,7 +84,7 @@ class RegForm extends React.Component {
       cropping: true,
       mediaType: 'photo'
     }).then(imageSelected => {
-      this.setState({ imageSelected: imageSelected.sourceURL })
+      this.setState({ imageSelected: imageSelected.path })
     })
   }
 
@@ -102,6 +103,7 @@ class RegForm extends React.Component {
     }
     this.props.onCreate(vars)
   }
+
   checkConstraits (step) {
     const stepBefore = step - 1
     if (stepBefore === 1) {
@@ -139,32 +141,33 @@ class RegForm extends React.Component {
     }
     return ''
   }
+
   async goToStep (step) {
     const error = this.checkConstraits(step)
-    
+
     if (error !== '') {
       this.setState({ toasterMsg: error })
       return null
     }
-    if(step ===3){
-      const vars = { email : this.state.email, phone: this.state.phone }
+    if (step === 3) {
+      const vars = { email: this.state.email, phone: this.state.phone }
       let count
       try {
         count = await request(graphqlServer, GQL_COUNT_USER, vars)
       } catch {
-        this.setState({ toasterMsg: "NETWORK_ERROR" })
+        this.setState({ toasterMsg: 'NETWORK_ERROR' })
         return null
       }
-      if(count.countUsers.emailFound > 0 && count.countUsers.phoneFound > 0) {
-        this.setState({ toasterMsg: "E-Mail and Phone already exists."})
+      if (count.countUsers.emailFound > 0 && count.countUsers.phoneFound > 0) {
+        this.setState({ toasterMsg: 'E-Mail and Phone already exists.' })
         return null
       }
-      if(count.countUsers.emailFound === 0 && count.countUsers.phoneFound > 0) {
-        this.setState({ toasterMsg: "Phone already exists."})
+      if (count.countUsers.emailFound === 0 && count.countUsers.phoneFound > 0) {
+        this.setState({ toasterMsg: 'Phone already exists.' })
         return null
       }
-      if(count.countUsers.emailFound > 0 && count.countUsers.phoneFound === 0) {
-        this.setState({ toasterMsg: "E-Mail already exists."})
+      if (count.countUsers.emailFound > 0 && count.countUsers.phoneFound === 0) {
+        this.setState({ toasterMsg: 'E-Mail already exists.' })
         return null
       }
     }
@@ -232,7 +235,7 @@ class RegForm extends React.Component {
       <View style={style.fields}>
         <Animated.View style={[style.fieldWrapper, { left: this.state.field1Left }]}>
           <Text style={style.getStarting}>
-            We will help you to create an account in a few easy steps.
+            {steps[0].desc}
           </Text>
         </Animated.View>
       </View>)
@@ -275,7 +278,7 @@ class RegForm extends React.Component {
         <Animated.View style={[style.fieldWrapper, { left: this.state.field1Left }]}>
           <TextInput
             keyboardType='email-address'
-            onChangeText={email => this.setState({ email })}
+            onChangeText={email => this.setState({ email: email.toLowerCase() })}
             value={this.state.email}
             placeholderTextColor='rgba(255,255,255,0.5)'
             ref={(input) => { this.email = input }}
@@ -454,7 +457,7 @@ class RegForm extends React.Component {
           </TouchableWithoutFeedback>
         </View>
         <View style={style.stepDescWrapper}>
-          <Text style={style.stepDesc}>Desc !</Text>
+          <Text style={style.stepDesc}>{steps[5].desc}</Text>
         </View>
       </View>)
   }
@@ -509,7 +512,7 @@ class RegForm extends React.Component {
               <Text style={style.buttonNextTxt}>
                 {this.state.step === 0 ? "Let's Go !" : 'Next'}
               </Text>
-            </View>
+              </View>
             : null}
         </TouchableOpacity>
       </View>

@@ -11,7 +11,7 @@ import { GQL_GETUSER } from '../graphQL/query'
 export const login = (email, password) => {
   const vars = { email, password, provider: 'UEP' }
   return dispatch => {
-    return request(graphqlServer, GQL_LOGIN, vars).then(res => 
+    return request(graphqlServer, GQL_LOGIN, vars).then(res =>
       dispatch({
         type: SET_AUTH_TOKEN,
         payload: {

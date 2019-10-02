@@ -1,12 +1,12 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import {
   THEME_DEFAULT_BUTTON,
   THEME_BUTTON1,
   THEME_BUTTON2,
   THEME_BUTTON1_TXT,
   THEME_BUTTON2_TXT,
-  THEME_DEFAULT_PADDING, 
-  SCREEN_WIDTH, 
+  THEME_DEFAULT_PADDING,
+  SCREEN_WIDTH,
   SCREEN_HEIGHT
 } from '../../config/theme'
 const designMode = false
