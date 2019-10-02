@@ -59,8 +59,9 @@ At the **react_native_graphql_redux **you will find the mobile solution using Re
 - **nodejs_graphql_apollo_sequelize** : Missing implementation of a query
 checkIfExists (email, phone) 
 
-- **react_native_graphql_redux** : Forgot password, persistent login, lint and
-polishment and review of the code. Also, I need to put more transitions at the login forms because I am not happy. Bug: Camera is not working.
+- **react_native_graphql_redux** : Forgot password, lint and
+polishment and review of the code. Also, I need to put more transitions at the login forms because I am not happy. Bug: Camera is not working. Also, it's 
+necessary to test in different devices.
 
 - **react_js_graphql_redux** : Not started
 

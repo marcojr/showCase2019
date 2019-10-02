@@ -5,7 +5,7 @@ import RNFetchBlob from 'rn-fetch-blob'
 import {
   View, Image, ActivityIndicator, Text,
   Animated, TouchableWithoutFeedback, TouchableOpacity,
-  Dimensions, Modal
+  Dimensions, Modal, Alert, AsyncStorage
 } from 'react-native'
 import AutoHeightImage from 'react-native-auto-height-image'
 import LoginForm from '../../containers/loginForm'
@@ -158,7 +158,9 @@ class Welcome extends React.Component {
       }
     }, 1000)
   }
-
+  storeToken(user) {
+    AsyncStorage.setItem('loggedUser', JSON.stringify(user))
+  }
   doLogin (email, password) {
     const emailTst = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (!emailTst.test(String(email)) || this.state.email === '') {
@@ -177,6 +179,7 @@ class Welcome extends React.Component {
     this.props.login(email, password).then(result => {
       const payload = result.payload
       if (payload.data) {
+        this.storeToken(payload.data)
         Actions.user()
       }
       if (payload.error) {
@@ -203,6 +206,7 @@ class Welcome extends React.Component {
     })
     this.props.completeLogin(userid, code).then(result => {
       if (result.payload.data) {
+        this.storeToken(result.payload.data)
         Actions.user()
       }
       if (result.error) {
@@ -222,6 +226,17 @@ class Welcome extends React.Component {
         return (
           <LoginForm
             onLogin={(email, password) => this.doLogin(email, password)}
+            onForgot={() =>{
+              Alert.alert(
+                'Really ?',
+                'Ok, you forgot your password. And I forgot to create this feature.Sorry !',
+                [ 
+                  
+                  {text: 'OK', onPress: () => console.log('OK Pressed')}
+                ],
+                {cancelable: false},
+              )
+            }}
             onLoginWithPhone={() => {
               this.fadeCore(0, () => {
                 this.fadeCore(1)

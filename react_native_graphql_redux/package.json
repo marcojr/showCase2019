@@ -36,7 +36,8 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "rn-fetch-blob": "^0.10.16",
-    "save": "^2.4.0"
+    "save": "^2.4.0",
+    "sync-storage": "^0.4.0"
   },
   "devDependencies": {
     "@babel/core": "7.6.2",

@@ -7,7 +7,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  FlatList, Platform, Dimensions, Alert
+  FlatList, Platform, Dimensions, Alert, AsyncStorage
 } from 'react-native'
 import DeviceInfo from 'react-native-device-info'
 import { getUser, logoff } from '../../redux/AppActions'
@@ -20,7 +20,8 @@ class User extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: []
+      data: [],
+      token: undefined
     }
   }
   addData(field, value) {
@@ -66,7 +67,7 @@ class User extends React.Component {
         { text: 'NO' },
         {
           text: 'YES', onPress: () => {
-            this.props.logoff(this.props.authToken.data.token, true).then(() => {
+            this.props.logoff(this.state.token.token, true).then(() => {
               Actions.welcome()
             })
           }
@@ -89,8 +90,10 @@ class User extends React.Component {
           />
           <View style={style.actionButtons}>
             <TouchableOpacity onPress={() => {
-              this.props.logoff(this.props.authToken.data.token, false)
-              Actions.welcome()
+              this.props.logoff(this.state.token.token, false).then(r =>{
+                Actions.welcome()
+              })
+              
             }}
             >
               <View style={[style.bt1Wrapper, { borderColor: 'black' }]}>
@@ -132,7 +135,25 @@ class User extends React.Component {
       if (G === "F") { return "Female" }
       if (G === "U") { return "Prefer to not say" }
     }
-    this.props.getUser(this.props.authToken.data.token).then(async r => {
+    let token
+    if(this.props.credentials) {
+      this.setState({
+        token: this.props.credentials
+      })
+      token = this.props.credentials
+    } else {
+      this.setState({
+        token: this.props.authToken.data
+      })
+      token = this.props.authToken.data
+    }
+    this.props.getUser(token.token).then(async r => {
+      if(r.payload.error) {
+        if(r.payload.error.response.errors[0].message === 'ERROR_INVALID_SESSION') {
+          AsyncStorage.removeItem('loggedUser')
+          Actions.welcome()
+        }
+      }
       this.addData('E-Mail', r.payload.data.email)
       this.addData('Mobile', r.payload.data.phone)
       this.addData('Gender', getGender(r.payload.data.gender))
