@@ -51,13 +51,13 @@ class RegForm extends React.Component {
       fieldWrapperOpacity: new Animated.Value(1),
       field1Left: new Animated.Value(0),
       field2Left: new Animated.Value(0),
-      email: 'xxx@xxx.com',
-      firstName: 'Mrxxxx',
-      lastName: 'XXX',
-      password1: 'xxx123',
-      password2: 'xxx123',
+      email: 'me@marcojr.com.br',
+      firstName: 'Marco',
+      lastName: 'S. Junior',
+      password1: '1111',
+      password2: '1111',
       gender: 'M',
-      phone: '+447851160001',
+      phone: '+447903450712',
       dob: '1975-03-24',
       toasterMsg: '',
       hideGetStart: false,
@@ -72,7 +72,6 @@ class RegForm extends React.Component {
       multiple: false,
       mediaType: 'photo'
     }).then(imageSelected => {
-      console.log(imageSelected)
       this.setState({ imageSelected: imageSelected.path })
     })
   }

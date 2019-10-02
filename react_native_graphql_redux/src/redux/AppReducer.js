@@ -4,7 +4,9 @@ const INITIAL_STATE = {
   appVersion: 1,
   toasterMsg: '',
   authToken: {},
-  user: undefined,
+  user: { 
+    data: undefined 
+  },
   useDarkMode: initialMode
 }
 export default (state = INITIAL_STATE, action) => {

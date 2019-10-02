@@ -57,10 +57,12 @@ const server = new ApolloServer({
     if (Date.now() >= jwtDecoded.exp * 1000) {
       throw new UserInputError(ErrorTypes.ERROR_INVALID_SESSION)
     }
+    const expiresOn = new Date(jwtDecoded.exp * 1000).toISOString()
     const invalid = await SysInvalidSession.findOne({ where : { token : splitToken }})
     return invalid ? noToken : {
       USER_id: jwtDecoded.USER_id,
-      authToken: splitToken
+      authToken: splitToken,
+      expiresOn
     }
   }
 })

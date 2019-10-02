@@ -1,7 +1,10 @@
 import { SET_AUTH_TOKEN, SET_USER } from './types'
 import { graphqlServer } from '../config/servers'
 import { request, GraphQLClient } from 'graphql-request'
-import { GQL_LOGIN, GQL_COMPLETE_LOGIN, GQL_CREATE_USER } from '../graphQL/mutation'
+import {  GQL_LOGIN, 
+          GQL_COMPLETE_LOGIN, 
+          GQL_CREATE_USER,
+          GQL_LOGOFF, GQL_TERMINATE } from '../graphQL/mutation'
 import { GQL_GETUSER } from '../graphQL/query'
 export const login = (email, password) => {
   const vars = { email, password, provider: 'UEP' }
@@ -81,6 +84,30 @@ export const getUser = (authToken) => {
         type: SET_USER,
         payload: {
           data: res.getUser
+        }
+      })
+    )
+      .catch(ex =>
+        dispatch({
+          type: SET_USER,
+          payload: {
+            error: ex
+          }
+        }))
+  }
+}
+export const logoff = (authToken, terminate) => {
+  const graphQLClient = new GraphQLClient(graphqlServer, {
+    headers: {
+      Authorization: 'Bearer ' + authToken
+    }
+  })
+  return dispatch => {
+    return graphQLClient.request(terminate ? GQL_TERMINATE : GQL_LOGOFF).then(() =>
+      dispatch({
+        type: SET_USER,
+        payload: {
+          data: undefined
         }
       })
     )

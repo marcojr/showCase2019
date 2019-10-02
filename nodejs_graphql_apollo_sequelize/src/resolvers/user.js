@@ -1,6 +1,7 @@
 import User from '../models/user'
 import uuidv4 from "uuid/v4"
 import SysVerify from '../models/sysVerify'
+import SysInvalidSession from '../models/sysInvalidSession'
 import ErrorTypes from '../errorTypes'
 import { UserInputError } from 'apollo-server-express'
 import { generateJwtToken, generateNumericCode } from '../libs/utils'
@@ -49,7 +50,10 @@ export default {
             if(!context.USER_id) {
                 throw new UserInputError(ErrorTypes.ERROR_INVALID_SESSION)
             }
-            await SysInvalidSession.create({ token: context.authToken, expiresOn })
+            await SysInvalidSession.create({ 
+                                                token: context.authToken, 
+                                                expiresOn: context.expiresOn 
+            })
             await User.destroy({where: {id: context.USER_id}})
             return true
         },

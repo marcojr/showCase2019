@@ -42,7 +42,7 @@ export default StyleSheet.create({
     width: coreWidth / 2,
     height: coreWidth / 2,
     borderRadius: 170 / 2,
-    backgroundColor: 'blue',
+    backgroundColor: 'white',
     marginTop: -30,
     marginLeft: -25,
     borderWidth: 3,
@@ -101,7 +101,28 @@ export default StyleSheet.create({
   bt1Icon: THEME_BUTTON3_ICON,
   bt2Wrapper: THEME_BUTTON6,
   bt2Txt: THEME_BUTTON6_TXT,
-  bt2Icon: THEME_BUTTON6_ICON
+  bt2Icon: THEME_BUTTON6_ICON,
+  itemRowWrapper: {
+    paddingRight: 15, 
+    display: 'flex', 
+    flexDirection: 'row', 
+    justifyContent: 'space-between'
+  },
+  field : {
+    fontSize: 15
+  },
+  valueWrapper : { 
+    display: 'flex', 
+    flexDirection: 'row' 
+  },
+  value: { 
+    marginRight: 5, 
+    fontWeight: 'bold', 
+    color: '#c0c0c0' 
+  },
+  chevron: {
+    color: '#eaeaea'
+  }
 })
 
 

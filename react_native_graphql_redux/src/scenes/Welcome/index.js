@@ -31,7 +31,7 @@ class Welcome extends React.Component {
       toasterMsg: ''
     }
     setTimeout(() => {
-      this.doLogin('me@marcojr.com.br','1111')
+      //this.doLogin('me@marcojr.com.br','1111')
     }, 2000)
   }
 
@@ -148,11 +148,10 @@ class Welcome extends React.Component {
         }, RNFetchBlob.wrap(vars.picture.replace('file://', '')))
           .then(r => {
             vars.picture = uri.substring(0, uri.indexOf('?'))
-            console.log(vars.picture)
             doCreate()
           })
           .catch(err => {
-            console.log(err)
+            // review this
           })
       } else {
         doCreate()
@@ -176,7 +175,6 @@ class Welcome extends React.Component {
       showReset: false
     })
     this.props.login(email, password).then(result => {
-      console.log(643, result)
       const payload = result.payload
       if (payload.data) {
         Actions.user()

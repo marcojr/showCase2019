@@ -1,54 +1,81 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { View, 
-  ImageBackground, 
-  Image, 
-  Text, 
-  TouchableOpacity, 
-  FlatList, Platform, Dimensions } from 'react-native'
+import { Actions } from 'react-native-router-flux'
+import {
+  View,
+  ImageBackground,
+  Image,
+  Text,
+  TouchableOpacity,
+  FlatList, Platform, Dimensions, Alert
+} from 'react-native'
 import DeviceInfo from 'react-native-device-info'
-import { getUser } from '../../redux/AppActions'
+import { getUser, logoff } from '../../redux/AppActions'
 import style from './style'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faSignOutAlt, faTrashAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 
-
 class User extends React.Component {
   constructor(props) {
     super(props)
-    this.state={
+    this.state = {
       data: []
     }
   }
-  addData(field, value){
+  addData(field, value) {
     data = Object.assign(this.state.data)
     data.push({
       key: Math.random(),
       field, value
     })
-    this.setState({data})
+    this.setState({ data })
   }
   getListViewItem = (item) => {
     Alert.alert(item.key);
   }
-  renderSeparator = () => {  
-    return (  
-        <View  
-            style={{  
-                height: 1,  
-                width: "100%",  
-                borderColor: "#eaeaea", 
-                borderBottomWidth: 1,
-                marginTop: 15,
-                marginBottom: 15 
-            }}  
-        />  
-    ) 
-}
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          borderColor: "#eaeaea",
+          borderBottomWidth: 1,
+          marginTop: 15,
+          marginBottom: 15
+        }}
+      />
+    )
+  }
+  renderRow(item) {
+    return (
+      <View style={style.itemRowWrapper}>
+        <Text style={style.field}>{item.field}</Text>
+        <View style={style.valueWrapper}>
+          <Text style={style.value}>{item.value}</Text>
+          <FontAwesomeIcon size={16} style={style.chevron} icon={faChevronRight} />
+        </View>
+      </View>)
+  }
+  terminate() {
+    Alert.alert(
+      'Are you sure ?',
+      'This will terminate your account and all of your data will be erased from our database permanently.',
+      [
+        { text: 'NO' },
+        {
+          text: 'YES', onPress: () => {
+            this.props.logoff(this.props.authToken.data.token, true).then(() => {
+              Actions.welcome()
+            })
+          }
+        },
+      ]
+    )
+  }
   render() {
-    console.log(this.props.user)
-    if (!this.props.user) { return null }
+    if (!this.props.user.data) { return null }
     return (
       <ImageBackground
         blurRadius={0}
@@ -62,7 +89,8 @@ class User extends React.Component {
           />
           <View style={style.actionButtons}>
             <TouchableOpacity onPress={() => {
-
+              this.props.logoff(this.props.authToken.data.token, false)
+              Actions.welcome()
             }}
             >
               <View style={[style.bt1Wrapper, { borderColor: 'black' }]}>
@@ -70,7 +98,9 @@ class User extends React.Component {
                 <Text style={style.bt1PhoneTxt}>Logout</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => { }}>
+            <TouchableOpacity onPress={() => {
+                this.terminate()
+            }}>
               <View style={style.bt2Wrapper}>
                 <FontAwesomeIcon size={16} style={style.bt2Icon} icon={faTrashAlt} />
                 <Text style={style.bt2Txt}>
@@ -83,13 +113,8 @@ class User extends React.Component {
             <FlatList
               data={this.state.data}
               renderItem={({ item }) =>
-                <View style={{paddingRight: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={{fontSize: 15}}>{item.field}</Text>
-                  <View style={{display: 'flex', flexDirection: 'row'}}>
-                    <Text style={{marginRight: 5, fontWeight: 'bold', color: '#c0c0c0'}}>{item.value}</Text>
-                    <FontAwesomeIcon size={16} style={{color: '#eaeaea'}} icon={faChevronRight} />
-                  </View>
-                </View>}
+                this.renderRow(item)
+              }
               ItemSeparatorComponent={this.renderSeparator}
             />
           </View>
@@ -102,13 +127,12 @@ class User extends React.Component {
       </ImageBackground>)
   }
   componentDidMount() {
-    console.log(56,DeviceInfo.getBrand())
     const getGender = (G) => {
-      if(G === "M") { return "Male"}
-      if(G === "F") { return "Female"}
-      if(G === "U") { return "Prefer to not say"}
+      if (G === "M") { return "Male" }
+      if (G === "F") { return "Female" }
+      if (G === "U") { return "Prefer to not say" }
     }
-    this.props.getUser(this.props.authToken.data.token).then(async r =>{
+    this.props.getUser(this.props.authToken.data.token).then(async r => {
       this.addData('E-Mail', r.payload.data.email)
       this.addData('Mobile', r.payload.data.phone)
       this.addData('Gender', getGender(r.payload.data.gender))
@@ -133,5 +157,5 @@ const mapStateToProps = state => (
 )
 export default connect(mapStateToProps,
   {
-    getUser
+    getUser, logoff
   })(User)

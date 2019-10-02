@@ -58,3 +58,17 @@ mutation
     { token, expiresOn }
   }
 `
+export const GQL_LOGOFF = `
+mutation 
+  Logoff
+  {
+    logoff
+  }
+`
+export const GQL_TERMINATE = `
+mutation 
+  TerminateUser
+  {
+    terminateUser
+  }
+`
