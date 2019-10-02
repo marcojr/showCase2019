@@ -1,7 +1,16 @@
 export const GQL_GETUSER = ` 
 query GetUser {
     getUser {
-      id
+      id,
+      email,
+      firstName,
+      lastName,
+      displayName,
+      dob,
+      phone,
+      gender,
+      loginProvider,
+      picture
     }
   }
 `

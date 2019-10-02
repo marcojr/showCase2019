@@ -5,10 +5,10 @@ import {
   THEME_BUTTON2,
   THEME_BUTTON1_TXT,
   THEME_BUTTON2_TXT,
-  THEME_DEFAULT_PADDING
+  THEME_DEFAULT_PADDING, 
+  SCREEN_WIDTH, 
+  SCREEN_HEIGHT
 } from '../../config/theme'
-const scrWidth = Dimensions.get('window').width
-const scrHeight = Dimensions.get('window').height
 const designMode = false
 export default StyleSheet.create({
   background: {
@@ -23,8 +23,8 @@ export default StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    width: scrWidth,
-    height: scrHeight
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT
   },
   bkg1: {
     zIndex: 100
@@ -49,8 +49,8 @@ export default StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    width: scrWidth,
-    height: scrHeight,
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
     zIndex: 1000,
     display: 'flex',
     backgroundColor: designMode ? 'purple' : null

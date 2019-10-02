@@ -45,7 +45,7 @@ class RegForm extends React.Component {
     super(props)
     this.state = {
       imageSelected: undefined,
-      step: 2,
+      step: 0,
       stepName: steps[0].name,
       stepDesc: steps[0].desc,
       fieldWrapperOpacity: new Animated.Value(1),

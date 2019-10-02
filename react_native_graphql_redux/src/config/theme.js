@@ -34,7 +34,8 @@ export const THEME_BUTTON3 = {
   backgroundColor: 'white',
   borderWidth: 1,
   borderColor: 'white',
-  padding: 7
+  padding: 7,
+  height: 35
 }
 export const THEME_BUTTON3_TXT = {
   fontSize: 16,
@@ -52,7 +53,8 @@ export const THEME_BUTTON4 = {
   borderRadius: 10,
   padding: 7,
   borderWidth: 1,
-  borderColor: 'white'
+  borderColor: 'white',
+  height: 35
 }
 export const THEME_BUTTON4_TXT = {
   fontSize: 16,
@@ -83,4 +85,24 @@ export const THEME_BUTTON5_TXT = {
 export const THEME_BUTTON5_ICON = {
   color: 'white',
   marginBottom: 10
+}
+export const THEME_BUTTON6 = {
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 10,
+  backgroundColor: 'white',
+  borderWidth: 1,
+  borderColor: 'red',
+  padding: 7,
+  height: 35
+}
+export const THEME_BUTTON6_TXT = {
+  fontSize: 16,
+  color: 'red'
+}
+export const THEME_BUTTON6_ICON = {
+  color: 'red',
+  marginRight: 5
 }

@@ -9,6 +9,6 @@ export default props => (
   <Router>
     <Scene key='root'>
       <Scene key='welcome' component={Welcome} hideNavBar />
-      <Scene key='user' component={User} hideNavBar={false} left={() => null} />
+      <Scene key='user' titleStyle={{color: 'white'}} title={'Profile'} component={User} hideNavBar={false} navTransparent left={() => null} />
     </Scene>
   </Router>)
