@@ -66,7 +66,11 @@ At the **react_native_graphql_redux **you will find the mobile solution using Re
 
 # Executing react_native_graphql_redux
 
-Assuming that you have already React Native installed and this repo cloned, follow the steps bellow:
+**If you don't have time or don't want to install it... Just ring me
+and ask me to include your e-mail as a tester so you can execute
+in an Iphone using Test Flight.**
+
+So, if you decide to install.... Assuming that you have already React Native installed and this repo cloned, follow the steps bellow:
 
 - perform a npm install into the react_native_graphql_redux
 - Use react-native upgrade to generate ios and android files
@@ -79,6 +83,8 @@ export const nodeAPI = '(url containing the nodejs_graphql_apollo_sequelize)/'
 ```
 
 # Deploying nodejs_graphql_apollo_sequelize:
+
+**If you don't have time or don't want to install it...Ask me for the url containing an Amazon AWS Elastic Beanstalk URL running all of this.Playground is available, so you can have good times executing queries and mutations.: **
 
 After clone the repo, go to /nodejs_graphql_apollo_sequelize and create the file nodejs_graphql_apollo_sequelize/src/secrets.js and populate with your own data:
 
@@ -112,8 +118,6 @@ Also, this GraphQL Apollo Server requires a BLOB account on Microsoft Azure to s
 
 Oh, I almost forgot... you need to setup an account
 at https://www.nexmo.com/ for SMS API. After this step, you need to populate your consumer key and secret at the secrets.js file.
-
-Too much work, no ? Yeah, I know...let's make different...download the code to evaluate me, but instead lift the server, ask me for the url containing an Amazon AWS Elastic Beanstalk running all of this.Playground is available, so you can have good times executing queries and mutations.: I am good thanks!
 
 # Few screen shots of mobile react native solution
 
