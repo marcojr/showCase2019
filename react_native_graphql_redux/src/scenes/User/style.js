@@ -11,9 +11,25 @@ import {
   SCREEN_WIDTH,
   SCREEN_HEIGHT
 } from '../../config/theme'
-const secondBkgConstant = SCREEN_WIDTH * 3.5
+let secondBkgConstant
 const coreWidth = SCREEN_WIDTH - (THEME_DEFAULT_PADDING * 3)
+switch (true) {
+  case (SCREEN_HEIGHT < 750):
+    secondBkgConstant = (coreWidth * 4.6) - (SCREEN_HEIGHT /2.65)
+    break
+  default:
+    secondBkgConstant = SCREEN_WIDTH * 3.5
+}
 export default StyleSheet.create({
+  secondBackground: {
+    position: 'absolute',
+    bottom: ((secondBkgConstant / 2) * -1) - 80,
+    left: SCREEN_WIDTH / 2 - (secondBkgConstant / 2),
+    width: secondBkgConstant,
+    backgroundColor: '#eaeaea',
+    height: secondBkgConstant,
+    borderRadius: secondBkgConstant / 2
+  },
   page: {
     position: 'absolute',
     top: 0,
@@ -47,17 +63,6 @@ export default StyleSheet.create({
     marginLeft: -25,
     borderWidth: 3,
     borderColor: 'white'
-  },
-  secondBackground: {
-    position: 'absolute',
-    bottom: ((secondBkgConstant / 2) * -1) - 80,
-    left: SCREEN_WIDTH / 2 - (secondBkgConstant / 2),
-    width: secondBkgConstant,
-    backgroundColor: '#eaeaea',
-    // backgroundColor: 'rgba(255,255,255,0.6)',
-    height: secondBkgConstant,
-    borderRadius: secondBkgConstant / 2
-
   },
   names: {
     position: 'absolute',

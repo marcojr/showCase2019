@@ -5,7 +5,7 @@ import RNFetchBlob from 'rn-fetch-blob'
 import {
   View, Image, ActivityIndicator, Text,
   Animated, TouchableWithoutFeedback, TouchableOpacity,
-  Dimensions, Modal, Alert, AsyncStorage
+  Dimensions, Modal, Alert, AsyncStorage, KeyboardAvoidingView
 } from 'react-native'
 import AutoHeightImage from 'react-native-auto-height-image'
 import LoginForm from '../../containers/loginForm'
@@ -263,6 +263,9 @@ class Welcome extends React.Component {
   renderDivisions () {
     return (
       <View style={style.divisions}>
+        <KeyboardAvoidingView 
+          behavior="position" 
+          style={{height: 580}}>
         <View style={style.titleWrapper}>
           <Text style={style.title}>
             {this.state.titleLine1}
@@ -274,10 +277,13 @@ class Welcome extends React.Component {
         <Animated.View style={[style.coreWrapper, { opacity: this.state.coreOpacity }]}>
           {this.renderCore()}
         </Animated.View>
-      </View>)
+        </KeyboardAvoidingView>
+      </View>
+      )
   }
 
   reset () {
+    this.setBlurOpacity(1)
     this.fadeCore(0, () => {
       this.fadeCore(1)
       this.setState({

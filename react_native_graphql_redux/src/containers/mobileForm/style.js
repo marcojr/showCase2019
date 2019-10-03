@@ -16,7 +16,7 @@ import {
 const designMode = false
 export default StyleSheet.create({
   form: {
-
+    height: 170,
     display: 'flex',
     alignItems: 'center',
     paddingRight: THEME_DEFAULT_PADDING,

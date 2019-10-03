@@ -87,7 +87,7 @@ export default StyleSheet.create({
   buttonSpacing: {
     marginLeft: THEME_DEFAULT_PADDING,
     marginRight: THEME_DEFAULT_PADDING,
-    marginTop: THEME_DEFAULT_PADDING / 3
+    marginTop: THEME_DEFAULT_PADDING / 2
   },
   getStarting: {
     fontSize: 20,
@@ -130,7 +130,7 @@ export default StyleSheet.create({
   },
   btnReset: {
     position: 'absolute',
-    top: THEME_DEFAULT_PADDING * 2,
+    top: THEME_DEFAULT_PADDING * 1.5,
     right: THEME_DEFAULT_PADDING / 2,
     padding: 10,
     zIndex: 9999

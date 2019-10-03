@@ -25,7 +25,7 @@ class LoginForm extends React.Component {
             }}
             placeholder='E-Mail'
             placeholderTextColor='rgba(255,255,255,0.5)'
-            onChangeText={(email) => this.setState({ email })}
+            onChangeText={(email) => this.setState({ email: email.toLowerCase() })}
             value={this.state.email}
             keyboardType='email-address'
             style={style.textInput}

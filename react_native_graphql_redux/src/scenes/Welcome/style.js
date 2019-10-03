@@ -53,18 +53,19 @@ export default StyleSheet.create({
     height: SCREEN_HEIGHT,
     zIndex: 1000,
     display: 'flex',
-    backgroundColor: designMode ? 'purple' : null
+    backgroundColor: designMode ? 'yellow' : null
   },
   titleWrapper: {
-    backgroundColor: designMode ? 'blue' : null,
-    flex: 2,
-    marginTop: 170
+    height: 120,
+    marginTop: '35%'
+    //marginBottom: 300 //deleta isso
   },
   coreWrapper: {
     backgroundColor: designMode ? 'yellow' : null,
     height: 300,
     flex: 6,
-    marginBottom: 170
+    marginBottom: 170,
+    marginTop: 50
   },
   title: {
     color: 'white',

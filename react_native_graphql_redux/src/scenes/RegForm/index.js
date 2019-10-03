@@ -528,7 +528,6 @@ class RegForm extends React.Component {
             this.setState({ toasterMsg: '' })
           }}
         />
-
         <Image
           style={style.bkg}
           blurRadius={50}

@@ -158,9 +158,9 @@ class Tour extends React.Component {
                   <Text style={[style.desc, { color: 'white' }]}>at
                     <Text
                       onPress={() => {
-                        Linking.openURL('https://www.marcojr.com.br/showCase2019')
+                        Linking.openURL('https://www.github.com/marcojr/showCase2019')
                       }} style={style.hyperlink}
-                    > https://www.marcojr.com.br/showCase2019
+                    > https://github.com/marcojr/showCase2019
                     </Text>
                   </Text>
                 </View>
