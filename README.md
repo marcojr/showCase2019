@@ -6,12 +6,8 @@ code lint not set...
 
 But the idea will be...
 
-A dummy project for people with intentions to hire my services evaluate my code and
-the quality of my interface as a Web and Mobile Front End Developer, Backend Developer
-and UX/UI.
-
-Will be a full stack solution called Mantha Ray. It's just a part of the full Manta Ray Project with is much more extense. I will offer just the login page containing standard auth method using password and 2-factor authentication - And the registration page and
-the user profile page - It's probably enough.
+I've project named Tiburon. It's very huge, so many tables on the database, pages on the interface, many queries and mutations on the backend . I created a capped version of
+this project and set the name as **MANTA RAY** - It's just the login page containing standard auth method using password and 2-factor authentication - And the registration page and the user profile page. It's probablyu enough for people with intentions to hire my services evaluate my code and the quality of my interface as a Web and Mobile Front End Developer, Backend Developer and UX/UI.
 
 # What you will be capable to evaluate on me ?
 
