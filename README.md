@@ -52,11 +52,11 @@ Will be a full stack solution called Mantha Ray. It's just a part of the full Ma
 
 At the **nodejs_graphql_apollo_sequelize** you will find the backend solution.
 
-At the **react_native_graphql_redux **you will find the mobile solution using React Native, Redux and use of GraphQL on the very simple way using fetch instead hooks (So soon a version without redux and using hooks)
+At the **react_native_graphql_redux ** you will find the mobile solution using React Native, Redux and use of GraphQL on the very simple way using fetch instead hooks (So soon a version without redux and using hooks)
 
 # What is Missing
 
-- **nodejs_graphql_apollo_sequelize** : It's done. All queries and mutations.
+- **nodejs_graphql_apollo_sequelize** : It's done. All queries and mutations. Just need to polish and review the code.
 
 - **react_native_graphql_redux** : Everything is working, but I need to make the polishment and review of the code. Need to remove yellow and red warnings on the console so the app can be 100% healthy.
 
