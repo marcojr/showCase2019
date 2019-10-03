@@ -50,7 +50,7 @@ Will be a full stack solution called Mantha Ray. It's just a part of the full Ma
 
 # Explaining the solutions
 
-At the **nodejs_graphql_apollo_sequelize** you will find the backend solution.
+At the **nodejs_graphql_apollo_sequelize** you will find the backend solution using nodeJS, GraphQL, Sequelize, Apollo Server and Microsoft SQL Server.
 
 At the **react_native_graphql_redux** you will find the mobile solution using React Native, Redux and use of GraphQL on the very simple way using fetch instead hooks (So soon a version without redux and using hooks)
 
