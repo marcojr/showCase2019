@@ -4,27 +4,17 @@ export default StyleSheet.create({
   container: {
     flex: 1
   },
-  linearGradient: {
-    flex: 1
-  },
   scv: {
     height: Dimensions.get('window').height
-  },
-  scvWrapper: {
-
   },
   page: {
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: Dimensions.get('window').width
   },
-
   btnWrapper: {
     width: Dimensions.get('window').width,
     alignItems: 'center'
-  },
-  img: {
-    // backgroundColor: 'blue'
   },
   imgWrapper: {
     height: 150,
@@ -80,33 +70,6 @@ export default StyleSheet.create({
     color: 'black',
     marginLeft: 10,
     fontSize: 16
-  },
-  signUp: {
-    position: 'absolute',
-    bottom: 40,
-    width: Dimensions.get('window').width,
-    alignItems: 'center'
-  },
-  imgFirst: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-    position: 'absolute',
-    top: 0,
-    left: 0
-  },
-  firstTitleWrapper: {
-    height: 50,
-    marginTop: 110
-  },
-  firstTitle: {
-    color: 'white',
-    fontSize: 35
-  },
-  bulletWrapperFirstPage: {
-    alignItems: 'center',
-    position: 'absolute',
-    top: 165,
-    width: Dimensions.get('window').width
   },
   hyperlink: {
     textDecorationLine: 'underline',

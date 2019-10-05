@@ -24,11 +24,11 @@ class User extends React.Component {
       token: undefined
     }
   }
-  addData(field, value) {
+  addData(field, value, canChange) {
     data = Object.assign(this.state.data)
     data.push({
       key: field+value,
-      field, value
+      field, value, canChange
     })
     this.setState({ data })
   }
@@ -55,7 +55,13 @@ class User extends React.Component {
         <Text style={style.field}>{item.field}</Text>
         <View style={style.valueWrapper}>
           <Text style={style.value}>{item.value}</Text>
-          <FontAwesomeIcon size={16} style={style.chevron} icon={faChevronRight} />
+          { item.canChange ? 
+          <View style={{width: 10}}>
+            <FontAwesomeIcon size={16} style={style.chevron} icon={faChevronRight} />
+          </View>
+          :
+          <View style={{width: 10}}/>
+          }
         </View>
       </View>)
   }
@@ -157,10 +163,11 @@ class User extends React.Component {
           Actions.welcome()
         }
       }
-      this.addData('E-Mail', r.payload.data.email)
-      this.addData('Mobile', r.payload.data.phone)
-      this.addData('Gender', getGender(r.payload.data.gender))
-      this.addData('Birthday', r.payload.data.dob)
+      this.addData('E-Mail', r.payload.data.email, true)
+      this.addData('Mobile', r.payload.data.phone, true)
+      this.addData('Gender', getGender(r.payload.data.gender), true)
+      this.addData('Birthday', r.payload.data.dob, true)
+      this.addData('Password', '••••••••', true)
       this.addData('OS Name', Platform.OS)
       this.addData('OS Version', Platform.Version)
       this.addData('Screen Width', Dimensions.get('window').width)
@@ -168,7 +175,7 @@ class User extends React.Component {
       this.addData('Device Brand', await DeviceInfo.getBrand())
       this.addData('Device Model', await DeviceInfo.getModel())
       this.addData('Device Type', await DeviceInfo.getDeviceType())
-      this.addData('Device Memory', await DeviceInfo.getTotalMemory() / 1024 / 1024 / 1024 + ' Gb')
+      this.addData('Device Memory', await Math.floor(DeviceInfo.getTotalMemory() / 1024 / 1024 / 1024) + ' Gb')
       this.addData('Device Storage', Math.floor(await DeviceInfo.getTotalDiskCapacity() / 1024 / 1024 / 1024) + ' Gb')
     })
   }
