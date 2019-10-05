@@ -8,9 +8,9 @@ import {
   Dimensions, Modal, Alert, AsyncStorage, KeyboardAvoidingView
 } from 'react-native'
 import AutoHeightImage from 'react-native-auto-height-image'
-import LoginForm from '../../containers/loginForm'
-import MobileForm from '../../containers/mobileForm'
-import Toaster from '../../containers/toaster'
+import LoginForm from './loginForm'
+import MobileForm from './mobileForm'
+import Toaster from '../../components/toaster'
 import style from './style'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'

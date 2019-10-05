@@ -11,7 +11,7 @@ import {
   THEME_BUTTON4_TXT,
   THEME_BUTTON4_ICON,
   SCREEN_WIDTH
-} from '../../config/theme'
+} from '../../../config/theme'
 const designMode = false
 export default StyleSheet.create({
   form: {

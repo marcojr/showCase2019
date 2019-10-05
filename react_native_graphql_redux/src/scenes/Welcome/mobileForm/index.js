@@ -4,8 +4,8 @@ import style from './style'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faMobileAlt, faBroadcastTower } from '@fortawesome/free-solid-svg-icons'
 import OTPInputView from '@twotalltotems/react-native-otp-input'
-import { GQL_CREATE_PHONE_CHALLENGE } from '../../graphQL/mutation'
-import { graphqlServer } from '../../config/servers'
+import { GQL_CREATE_PHONE_CHALLENGE } from '../../../graphQL/mutation'
+import { graphqlServer } from '../../../config/servers'
 import { request } from 'graphql-request'
 
 export default class extends React.Component {
@@ -74,7 +74,7 @@ export default class extends React.Component {
               onSubmitEditing={() => {
                 setTimeout(() => {
                   this.sendCode()
-                }, 1000)
+                }, 1500)
               }}
               onChangeText={(phone) => this.setState({ phone })}
               value={this.state.phone}

@@ -47,7 +47,7 @@ export default StyleSheet.create({
     backgroundColor: designMode ? 'red' : null,
     position: 'relative',
     width: SCREEN_WIDTH,
-    height: inputHeight * 4,
+    //height: inputHeight * 4,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

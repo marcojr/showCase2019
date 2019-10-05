@@ -21,7 +21,7 @@ class Tour extends React.Component {
   }
   decideRoute() {
     AsyncStorage.getItem('firstTime').then(data => {
-      if (!data) {
+      if (data) {
         AsyncStorage.getItem('loggedUser').then(user => {
           if (!user) {
             Actions.welcome()
