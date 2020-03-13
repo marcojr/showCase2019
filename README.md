@@ -53,6 +53,8 @@ Angular and ReactJS comming so soon...
 
 # Explaining the solutions
 
+At the **UX_UI** folder, there is a file built in Adobe XD containing the source and the prototype of the solution. Download Adobe XD for free to open the file.
+
 At the **nodejs_graphql_apollo_sequelize** you will find the backend solution using nodeJS, GraphQL, Sequelize, Apollo Server and Microsoft SQL Server.
 
 At the **react_native_graphql_redux** you will find the mobile solution using React Native, Redux and use of GraphQL on the very simple way using fetch instead hooks (So soon a version without redux and using hooks)

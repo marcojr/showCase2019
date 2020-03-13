@@ -31,7 +31,7 @@ class Welcome extends React.Component {
       toasterMsg: ''
     }
     setTimeout(() => {
-      // this.doLogin('me@marcojr.com.br','1111')
+      console.log('hello')
     }, 2000)
   }
 

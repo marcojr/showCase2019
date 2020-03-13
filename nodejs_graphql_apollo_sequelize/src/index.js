@@ -11,7 +11,7 @@ import SysInvalidSession from './models/sysInvalidSession'
 import { generateBlobUrl } from './libs/utils'
 const IN_PROD = process.env.NODE_ENV === 'production'
 
-const port = IN_PROD ? 5000 : 3000
+const port = IN_PROD ? process.env.PORT : 3000
 
 const app = express()
 
@@ -41,6 +41,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   playground: true,
+  introspection: true,
   context: async ({ req }) => {
     const token = req.headers.authorization
     const noToken  = {
