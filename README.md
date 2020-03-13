@@ -1,10 +1,6 @@
-### This is very WIP, not ready !
+### This is my Show Case 2019
 
-So, not a good time to judge my code !
-Nothing is ready, code not polished, 
-code lint not set...
-
-But the idea will be...
+The idea is...
 
 I've project named Tiburon. It's very huge, so many tables on the database, pages on the interface, many queries and mutations on the backend . I created a capped version of
 this project and set the name as **MANTA RAY** - It's just the login page containing standard auth method using password and 2-factor authentication - Also the registration page and the user profile page. It's probablyu enough for people with intentions to hire my services evaluate my code and the quality of my interface as a Web and Mobile Front End Developer, Backend Developer and UX/UI.
