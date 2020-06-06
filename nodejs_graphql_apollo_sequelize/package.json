@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "^2.9.0",
+    "apollo-server-express": "^2.14.2",
     "axios": "^0.19.0",
     "azure": "^2.3.1-preview",
     "casual": "^1.6.2",
