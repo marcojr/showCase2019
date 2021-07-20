@@ -21,7 +21,7 @@
     "graphql-request": "^1.8.2",
     "graphql-tag": "^2.10.1",
     "react": "16.9.0",
-    "react-native": "0.61.1",
+    "react-native": "0.62.3",
     "react-native-action-sheet": "^2.2.0",
     "react-native-auto-height-image": "^1.1.1",
     "react-native-dark-mode": "^0.1.0",
